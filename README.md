@@ -28,7 +28,7 @@ Alternatively, to compile using clang, invoke `make` using `Makefile.clang` file
 
 	make -f Makefile.clang
 
-The resulting `fastore_bin_`, `_fastore_rebin` and `fastore_pack` binaries will be placed in _bin_ subdirectory.
+The resulting `fastore_bin_`, `fastore_rebin` and `fastore_pack` binaries will be placed in `bin` subdirectory.
 
 
 However, to compile each subprogram separately, use the makefile files provided in each of subprograms directory.
