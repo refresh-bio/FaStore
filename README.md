@@ -2,6 +2,7 @@
 FaStore is a high-performance short FASTQ sequencing reads compressor.
 
 The compression is a multi-step process, hence the compressor consist of 3 tools:
+
 * `fastore_bin` - performing a DNA reads distribution into bins,
 * `fastore_rebin` - performing a DNA reads re-distribution into bins with further clusterization,
 * `fastore_pack` - performing compression of the DNA reads stored in bins.
