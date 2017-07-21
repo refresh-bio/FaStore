@@ -18,7 +18,7 @@ For example, to compress a pair of FASTQ files `IN_1.fastq` and `IN_2.fastq` wit
 
     ./compress_*_pe.sh IN_1.fastq IN_2.fastq COMP 8
 
-the compressed files will be stored as `COMP.cmeta' and `COMP.cdata' files.
+the compressed files will be stored as `COMP.cmeta` and `COMP.cdata` files.
 
 
 To decompress the archives generated in any of the above mentioned profile and using `8` processing threads type:
