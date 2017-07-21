@@ -1,11 +1,32 @@
 # FaStore
 FaStore is a high-performance short FASTQ sequencing reads compressor.
 
-The compression is a multi-step process, hence the compressor consist of 3 tools:
+The compression is a multi-step process, hence the compressor currently consist of 3 tools:
 
 * `fastore_bin` - performing a DNA reads distribution into bins,
 * `fastore_rebin` - performing a DNA reads re-distribution into bins with further clusterization,
 * `fastore_pack` - performing compression of the DNA reads stored in bins.
+
+However, for ease of use automated scripts to perform compression and decompression are provided in `scripts` directory. 
+
+
+# Usage
+
+FaStore offers a variety of different compression configurations. Hence, for an easier selection, we created 4 profiles, namely _lossless_, _reduced_, _lossy_ and _max_. For each of the profiles, a script `fastore_compress_*.sh` is provided.
+
+For example, to compress a pair of FASTQ files `IN_1.fastq` and `IN_2.fastq` with reads represented in pared-end mode and using `8` processing threads type:
+
+    ./compress_*_pe.sh IN_1.fastq IN_2.fastq COMP 8
+
+the compressed files will be stored as `COMP.cmeta' and `COMP.cdata' files.
+
+
+To decompress the archives generated in any of the above mentioned profile and using `8` processing threads type:
+
+    ./decompress_pe.sh COMP OUT 8
+
+the decompressed files will be stored as `OUT_1.fastq` and `OUT_2.fastq` files.
+
 
 
 # Building
@@ -14,7 +35,7 @@ The compression is a multi-step process, hence the compressor consist of 3 tools
 
 FaStore currently provides Makefiles for building on Linux and Mac OSX platforms.
 However it should also be able to be compiled on Windows platform. 
-The only one prequisite is the availability of the _zlib_ library in the system.
+The only one prerequisite is the availability of the _zlib_ library in the system.
 
 
 ## Compiling
@@ -28,29 +49,8 @@ Alternatively, to compile using clang, invoke `make` using `Makefile.clang` file
 
 	make -f Makefile.clang
 
-The resulting `fastore_bin_`, `fastore_rebin` and `fastore_pack` binaries will be placed in `bin` subdirectory.
+The resulting `fastore_bin`, `fastore_rebin` and `fastore_pack` binaries will be placed in `bin` subdirectory.
 
 
 However, to compile each subprogram separately, use the makefile files provided in each of subprograms directory.
 
-
-# Usage
-
-FASTQ reads compression is a multi-step process, consisting of running `fastore_bin` , optionally `fastore_rebin` and `fastore_pack` subprograms chained together. However, to decompress the DNA stream, only running _fastore\_pack_ is needed.
-
-## _fastore\_bin_
-
-...
-
-## _fastore\_rebin_
-
-...
-
-## _fastore\_pack_
-
-...
-
-
-# Examples
-
-...
