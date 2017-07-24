@@ -16,7 +16,9 @@ IN_2=$2
 TH=$3
 
 PACK="__pack"
-FQ_OUT="__out"
+OUT_1="__out_1.fastq"
+OUT_2="__out_2.fastq"
+
 
 
 # run very basic tests
@@ -24,26 +26,38 @@ FQ_OUT="__out"
 echo "--------------------------------"
 echo "testing: lossless"
 echo "--------------------------------"
-bash compress_lossless_pe.sh $IN_1 $IN_2 $PACK $TH
-bash decompress_pe.sh $PACK $FQ_OUT $TH
+bash compress.sh --lossless --in $IN_1 --pair $IN_2 --out $PACK --threads $TH
+bash decompress.sh --in $PACK --out $OUT_1 --pair $OUT_2 --threads $TH
+
+bash compress.sh --lossless --in $IN_1 --pair $IN_2 --out $PACK --threads $TH --fast
+bash decompress.sh --in $PACK --out $OUT_1 --pair $OUT_2 --threads $TH
 
 
 echo "--------------------------------"
 echo "testing: reduced"
 echo "--------------------------------"
-bash compress_reduced_pe.sh $IN_1 $IN_2 $PACK $TH
-bash decompress_pe.sh $PACK $FQ_OUT $TH
+bash compress.sh --reduced --in $IN_1 --pair $IN_2 --out $PACK --threads $TH
+bash decompress.sh --in $PACK --out $OUT_1 --pair $OUT_2 --threads $TH
+
+bash compress.sh --reduced --in $IN_1 --pair $IN_2 --out $PACK --threads $TH --fast
+bash decompress.sh --in $PACK --out $OUT_1 --pair $OUT_2 --threads $TH
 
 
 echo "--------------------------------"
 echo "testing: lossy"
 echo "--------------------------------"
-bash compress_lossy_pe.sh $IN_1 $IN_2 $PACK $TH
-bash decompress_pe.sh $PACK $FQ_OUT $TH
+bash compress.sh --lossy --in $IN_1 --pair $IN_2 --out $PACK --threads $TH
+bash decompress.sh --in $PACK --out $OUT_1 --pair $OUT_2 --threads $TH
+
+bash compress.sh --lossy --in $IN_1 --pair $IN_2 --out $PACK --threads $TH --fast
+bash decompress.sh --in $PACK --out $OUT_1 --pair $OUT_2 --threads $TH
 
 
 echo "--------------------------------"
 echo "testing: max"
 echo "--------------------------------"
-bash compress_max_pe.sh $IN_1 $IN_2 $PACK $TH
-bash decompress_pe.sh $PACK $FQ_OUT $TH
+bash compress.sh --max --in $IN_1 --pair $IN_2 --out $PACK --threads $TH
+bash decompress.sh --in $PACK --out $OUT_1 --pair $OUT_2 --threads $TH
+
+bash compress.sh --max --in $IN_1 --pair $IN_2 --out $PACK --threads $TH --fast
+bash decompress.sh --in $PACK --out $OUT_1 --pair $OUT_2 --threads $TH

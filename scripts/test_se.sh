@@ -23,26 +23,38 @@ FQ_OUT="__out"
 echo "--------------------------------"
 echo "testing: lossless"
 echo "--------------------------------"
-bash compress_lossless_se.sh $IN $PACK $TH
-bash decompress_se.sh $PACK $FQ_OUT $TH
+bash compress.sh --lossless --in $IN --out $PACK --threads $TH 
+bash decompress.sh --in $PACK --out $FQ_OUT --threads $TH
+
+bash compress.sh --lossless --in $IN --out $PACK --threads $TH --fast
+bash decompress.sh --in $PACK --out $FQ_OUT --threads $TH
 
 
 echo "--------------------------------"
 echo "testing: reduced"
 echo "--------------------------------"
-bash compress_reduced_se.sh $IN $PACK $TH
-bash decompress_se.sh $PACK $FQ_OUT $TH
+bash compress.sh --reduced --in $IN --out $PACK --threads $TH
+bash decompress.sh --in $PACK --out $FQ_OUT --threads $TH
+
+bash compress.sh --reduced --in $IN --out $PACK --threads $TH --fast
+bash decompress.sh --in $PACK --out $FQ_OUT --threads $TH
 
 
 echo "--------------------------------"
 echo "testing: lossy"
 echo "--------------------------------"
-bash compress_lossy_se.sh $IN $PACK $TH
-bash decompress_se.sh $PACK $FQ_OUT $TH
+bash compress.sh --lossy --in $IN --out $PACK --threads $TH
+bash decompress.sh --in $PACK --out $FQ_OUT --threads $TH
+
+bash compress.sh --lossy --in $IN --out $PACK --threads $TH --fast
+bash decompress.sh --in $PACK --out $FQ_OUT --threads $TH
 
 
 echo "--------------------------------"
 echo "testing: max"
 echo "--------------------------------"
-bash compress_max_se.sh $IN $PACK $TH
-bash decompress_se.sh $PACK $FQ_OUT $TH
+bash compress.sh --max --in $IN --out $PACK --threads $TH
+bash decompress.sh --in $PACK --out $FQ_OUT --threads $TH
+
+bash compress.sh --max --in $IN --out $PACK --threads $TH --fast
+bash decompress.sh --in $PACK --out $FQ_OUT --threads $TH
