@@ -156,7 +156,7 @@ if [ -z ${FAST_MODE+x} ]; then
 	rm $TMP_REBIN-4*
 
 	echo "- packing..."
-	$FASTORE_PACK e "-i$TMP_REBIN-8" "-o$OUT_PACK" "-t$TH_PACK" $PAR_PACK_C1 $PAR_PE -v 2>__err.log
+	$FASTORE_PACK e "-i$TMP_REBIN-8" "-o$OUT_PACK" "-t$TH_PACK" $PAR_PACK_C1 $PAR_PE -v
 	rm $TMP_REBIN-8*
 
 else
@@ -165,7 +165,7 @@ else
 	$FASTORE_BIN e "-i$IN_FQ" "-o$TMP_BIN" "-t$TH_BIN" $PAR_ID $PAR_QUA $PAR_BIN_C0 $PAR_PE
 
 	echo "- packing..."
-	$FASTORE_PACK e "-i$TMP_BIN" "-o$OUT_PACK" "-t$TH_PACK" $PAR_PACK_C0 $PAR_PE -v 2>__err.log
+	$FASTORE_PACK e "-i$TMP_BIN" "-o$OUT_PACK" "-t$TH_PACK" $PAR_PACK_C0 $PAR_PE -v
 	rm $TMP_BIN*
 
 fi
