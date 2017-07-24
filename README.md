@@ -12,18 +12,18 @@ However, for ease of use automated scripts to perform compression and decompress
 
 # Usage
 
-FaStore offers a variety of different compression configurations. Hence, for an easier selection, we created 4 profiles, namely _lossless_, _reduced_, _lossy_ and _max_. For each of the profiles, a script `fastore_compress_*.sh` is provided.
+FaStore offers a variety of different compression configurations. Hence, for an easier selection, we created 4 profiles, namely _lossless_, _reduced_, _lossy_ and _max_. To perform automatic compression and decompression, a pair of scripts `fastore_compress.sh` and `fastore_decompress.sh` is provided.
 
-For example, to compress a pair of FASTQ files `IN_1.fastq` and `IN_2.fastq` with reads represented in pared-end mode and using `8` processing threads type:
+For example, to compress a pair of FASTQ files `IN_1.fastq` and `IN_2.fastq` in the lossless mode with reads represented in pared-end mode and using `8` processing threads type:
 
-    ./compress_*_pe.sh IN_1.fastq IN_2.fastq COMP 8
+    ./fastore_compress.sh --lossless --in IN_1.fastq --pair IN_2.fastq --out COMP --threads 8
 
 the compressed files will be stored as `COMP.cmeta` and `COMP.cdata` files.
 
 
 To decompress the archives generated in any of the above mentioned profile and using `8` processing threads type:
 
-    ./decompress_pe.sh COMP OUT 8
+    ./fastore_decompress.sh --in COMP --out OUT_1.fastq --pair OUT_2.fastq --threads 8
 
 the decompressed files will be stored as `OUT_1.fastq` and `OUT_2.fastq` files.
 
