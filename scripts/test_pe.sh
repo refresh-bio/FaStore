@@ -26,38 +26,38 @@ OUT_2="__out_2.fastq"
 echo "--------------------------------"
 echo "testing: lossless"
 echo "--------------------------------"
-bash compress.sh --lossless --in $IN_1 --pair $IN_2 --out $PACK --threads $TH
-bash decompress.sh --in $PACK --out $OUT_1 --pair $OUT_2 --threads $TH
+bash fastore_compress.sh --lossless --in $IN_1 --pair $IN_2 --out $PACK --threads $TH
+bash fastore_decompress.sh --in $PACK --out $OUT_1 --pair $OUT_2 --threads $TH
 
-bash compress.sh --lossless --in $IN_1 --pair $IN_2 --out $PACK --threads $TH --fast
-bash decompress.sh --in $PACK --out $OUT_1 --pair $OUT_2 --threads $TH
+bash fastore_compress.sh --lossless --in $IN_1 --pair $IN_2 --out $PACK --threads $TH --fast
+bash fastore_decompress.sh --in $PACK --out $OUT_1 --pair $OUT_2 --threads $TH
 
 
 echo "--------------------------------"
 echo "testing: reduced"
 echo "--------------------------------"
-bash compress.sh --reduced --in $IN_1 --pair $IN_2 --out $PACK --threads $TH
-bash decompress.sh --in $PACK --out $OUT_1 --pair $OUT_2 --threads $TH
+bash fastore_compress.sh --reduced --in $IN_1 --pair $IN_2 --out $PACK --threads $TH
+bash fastore_decompress.sh --in $PACK --out $OUT_1 --pair $OUT_2 --threads $TH
 
-bash compress.sh --reduced --in $IN_1 --pair $IN_2 --out $PACK --threads $TH --fast
-bash decompress.sh --in $PACK --out $OUT_1 --pair $OUT_2 --threads $TH
+bash fastore_compress.sh --reduced --in $IN_1 --pair $IN_2 --out $PACK --threads $TH --fast
+bash fastore_decompress.sh --in $PACK --out $OUT_1 --pair $OUT_2 --threads $TH
 
 
 echo "--------------------------------"
 echo "testing: lossy"
 echo "--------------------------------"
-bash compress.sh --lossy --in $IN_1 --pair $IN_2 --out $PACK --threads $TH
-bash decompress.sh --in $PACK --out $OUT_1 --pair $OUT_2 --threads $TH
+bash fastore_compress.sh --lossy --in $IN_1 --pair $IN_2 --out $PACK --threads $TH
+bash fastore_decompress.sh --in $PACK --out $OUT_1 --pair $OUT_2 --threads $TH
 
-bash compress.sh --lossy --in $IN_1 --pair $IN_2 --out $PACK --threads $TH --fast
-bash decompress.sh --in $PACK --out $OUT_1 --pair $OUT_2 --threads $TH
+bash fastore_compress.sh --lossy --in $IN_1 --pair $IN_2 --out $PACK --threads $TH --fast
+bash fastore_decompress.sh --in $PACK --out $OUT_1 --pair $OUT_2 --threads $TH
 
 
 echo "--------------------------------"
 echo "testing: max"
 echo "--------------------------------"
-bash compress.sh --max --in $IN_1 --pair $IN_2 --out $PACK --threads $TH
-bash decompress.sh --in $PACK --out $OUT_1 --pair $OUT_2 --threads $TH
+bash fastore_compress.sh --max --in $IN_1 --pair $IN_2 --out $PACK --threads $TH
+bash fastore_decompress.sh --in $PACK --out $OUT_1 --pair $OUT_2 --threads $TH
 
-bash compress.sh --max --in $IN_1 --pair $IN_2 --out $PACK --threads $TH --fast
-bash decompress.sh --in $PACK --out $OUT_1 --pair $OUT_2 --threads $TH
+bash fastore_compress.sh --max --in $IN_1 --pair $IN_2 --out $PACK --threads $TH --fast
+bash fastore_decompress.sh --in $PACK --out $OUT_1 --pair $OUT_2 --threads $TH
