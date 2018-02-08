@@ -11,12 +11,39 @@ FASTORE_PACK=./fastore_pack
 #
 #
 
+log()
+{
+	if [ ! -z ${VERBOSE+x} ]; then
+		printf "$1\n"
+	fi
+}
 
 print_usage()
 {
-	echo "usage: bash $0 <mode> [--fast] --in <in.fq> [--pair <pair.fq>] --out <archive> [--threads <th>]"
 	echo ""
-	echo "where: <mode> can be one of: --lossless, --reduced, --lossy or --max"
+	echo "    FaStore -- a space saving solution for raw sequencing data"
+	echo ""
+	echo "usage: bash $0 <mode> [--fast] [--threads <th>]"
+	echo "          --in <in.fq> [--pair <pair.fq>] --out <archive>"
+	echo "          [--verbose] [--help]"
+	echo ""
+	echo "where:"
+	echo "    <mode> specifies the compression mode which can be one of:" 
+	echo "      --lossless     - lossless mode with only reads reordered" 
+	echo "      --reduced      - applied Illumina q-scores bining with read ids trimming"
+	echo "      --lossy        - applied QVZ for q-scores with read ids trimming"
+	echo "      --max          - applied q-scores binary thresholding and w/o read ids"
+	echo "    --fast           - C0 compression mode (C1 by default)"
+	echo "    --threads <th>   - the number of processing threads"
+	echo "    --in <in.fq>     - the FASTQ file to be processed. Multiple FASTQ files can"
+	echo "                       be passed in form: --in \"<in01.fq> <in02.fq> ... \""
+	echo "    --pair <pair.fq> - the paired FASTQ file(s). When specified, the compressor"
+	echo "                       will assume that the reads are paired with the ones from"
+	echo "                       the file specified by '--in'."
+	echo "    --out <archive>  - the prefix of the output archive files"
+	echo "    --verbose        - print additional information while compressing"
+	echo "    --help           - displays this message"
+	echo ""
 	exit 1
 }
 
@@ -62,7 +89,10 @@ do
 		--threads)
 			THREADS="$2"
 			shift 2;;
-		*) 
+		--verbose)
+			VERBOSE=1
+			shift 1;;
+		--help|*) 
 			echo "Unkown argument: \"$ARG\""
 			print_usage
 			exit 1;;
@@ -83,12 +113,12 @@ if [ -z ${IN+x} ]; then
 fi
 
 if [ -z ${THREADS+x} ]; then
-	echo "WARN: number of threads mode has not been specified --> setting to 1"
+	log "WARN: number of threads mode has not been specified --> setting to 1"
 	THREADS=1
 fi
 
 if [ -z ${OUT_PFX+x} ]; then
-	echo "WARN: no output files prefix name has been specified --> setting to OUT"
+	log "WARN: no output files prefix name has been specified --> setting to OUT"
 	OUT_PFX="OUT"
 fi
 
@@ -119,9 +149,9 @@ TH_PACK=$THREADS
 
 # temporary and output files configuration
 #
-TMP_PFX="__tmp-dna"
-TMP_BIN="$TMP_PFX-bin_pe"
-TMP_REBIN="$TMP_PFX-rebin_pe"
+TMP_PFX="__tmp-dna-$RANDOM"
+TMP_BIN="$TMP_PFX-bin"
+TMP_REBIN="$TMP_PFX-rebin"
 
 OUT_PACK="$OUT_PFX"
 
@@ -132,40 +162,58 @@ else
 	IN_FQ="$IN $PAIR"
 fi
 
+if [ ! -z ${VERBOSE+x} ]; then
+	PAR_PACK_VB="-v"
+fi
+
 #echo "$PAR_ID, $PAR_QUA, $PAR_PE, $IN, $PAIR, $OUT_PFX, $THREADS"
 
 
 
-echo "processing files: $IN_FQ"
+log "processing files: $IN_FQ"
 
 if [ -z ${FAST_MODE+x} ]; then
 
-	echo "- binning ..."
+	log "\n:: binning ..."
 	$FASTORE_BIN e "-i$IN_FQ" "-o$TMP_BIN" "-t$TH_BIN" $PAR_ID $PAR_QUA $PAR_BIN_C1 $PAR_PE
+	log "temporary files:"
+	log "$(ls -s $TMP_BIN.*)"
 
-	echo "- rebinning: 0 -> 2 ..."
+	log "\n:: rebinning: 0 -> 2 ..."
 	$FASTORE_REBIN e "-i$TMP_BIN" "-o$TMP_REBIN-2" "-t$TH_REBIN" $PAR_REBIN_C1 $PAR_PE -p2
+	log "temporary files:"
+	log "$(ls -s $TMP_REBIN-2.*)"
 	rm $TMP_BIN*
 
-	echo "- rebinning: 2 -> 4 ..."
+	log "\n:: rebinning: 2 -> 4 ..."
 	$FASTORE_REBIN e "-i$TMP_REBIN-2" "-o$TMP_REBIN-4" "-t$TH_REBIN" $PAR_REBIN_C1 $PAR_PE -p4
+	log "temporary files:"
+	log "$(ls -s $TMP_REBIN-4.*)"
 	rm $TMP_REBIN-2*
 
-	echo "- rebinning: 4 -> 8 ..."
+	log "\n:: rebinning: 4 -> 8 ..."
 	$FASTORE_REBIN e "-i$TMP_REBIN-4" "-o$TMP_REBIN-8" "-t$TH_REBIN" $PAR_REBIN_C1 $PAR_PE -p8
+	log "temporary files:"
+	log "$(ls -s $TMP_REBIN-8.*)"
 	rm $TMP_REBIN-4*
 
-	echo "- packing..."
-	$FASTORE_PACK e "-i$TMP_REBIN-8" "-o$OUT_PACK" "-t$TH_PACK" $PAR_PACK_C1 $PAR_PE -v
+	log "\n:: packing ..."
+	$FASTORE_PACK e "-i$TMP_REBIN-8" "-o$OUT_PACK" "-t$TH_PACK" $PAR_PACK_C1 $PAR_PE $PAR_PACK_VB
+	log "archive files:"
+	log "$(ls -s $OUT_PACK.*)"
 	rm $TMP_REBIN-8*
 
 else
 
-	echo "- binning ..."
+	log "\n:: binning ..."
 	$FASTORE_BIN e "-i$IN_FQ" "-o$TMP_BIN" "-t$TH_BIN" $PAR_ID $PAR_QUA $PAR_BIN_C0 $PAR_PE
+	log "temporary files:"
+	log "$(ls -s $TMP_BIN.*)"
 
-	echo "- packing..."
-	$FASTORE_PACK e "-i$TMP_BIN" "-o$OUT_PACK" "-t$TH_PACK" $PAR_PACK_C0 $PAR_PE -v
+	log "\n:: packing..."
+	$FASTORE_PACK e "-i$TMP_BIN" "-o$OUT_PACK" "-t$TH_PACK" $PAR_PACK_C0 $PAR_PE $PAR_PACK_VB
+	log "archive files:"
+	log "$(ls -s $OUT_PACK.*)"
 	rm $TMP_BIN*
 
 fi
