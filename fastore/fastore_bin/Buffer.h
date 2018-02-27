@@ -91,8 +91,7 @@ public:
 	{
 		ASSERT(size < size_);
 
-                byte* p = new (std::nothrow) byte[size_];
-                ASSERT(p != NULL);
+		byte* p = new byte[size_];
 
 		if (copy_)
 			std::copy(buffer, buffer + size, (byte*)p);
