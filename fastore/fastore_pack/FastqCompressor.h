@@ -52,7 +52,7 @@ public:
 protected:
 	struct BaseBlockHeader
 	{
-		static const uint32 Size = 4*sizeof(uint64) + 2*sizeof(uint32) + 2*sizeof(uint8);
+		static const uint64 Size = 4*sizeof(uint64) + 2*sizeof(uint32) + 2*sizeof(uint8);
 
 		uint64 recordsCount;
 		uint64 rawDnaStreamSize;
@@ -104,7 +104,7 @@ protected:
 	};
 
 
-	static const uint32 DefaultPpmdMemorySizeMb = 16;
+	static const uint64 DefaultPpmdMemorySizeMb = 16;
 	static const uint32 DefaultPpmdOrder = 4;
 
 	const CompressorParams params;				// TODO: try ref
@@ -316,7 +316,7 @@ public:
 protected:
 	struct RawBlockHeader : public BaseBlockHeader
 	{
-		static const uint32 Size = BaseBlockHeader::Size + 4*sizeof(uint64);
+		static const uint64 Size = BaseBlockHeader::Size + 4*sizeof(uint64);
 
 		// TODO: can be added more buffers as in LzBlockHeader
 		// and used as only one unified structure
@@ -434,7 +434,7 @@ protected:
 			std::fill(compBufferSizes.begin(), compBufferSizes.end(), 0);
 		}
 
-		static uint32 Size(uint64 buffersNum_)
+		static uint64 Size(uint64 buffersNum_)
 		{
 			return BaseBlockHeader::Size + 2 * buffersNum_ * sizeof(uint64);
 		}

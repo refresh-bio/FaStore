@@ -139,8 +139,8 @@ void BinEncoderSE::Run()
 					const FastqRecord& r0 = *records.back();        // back to have the max id number
 					const bool usesQuality = r0.qua != NULL;
 					const bool usesHeaders = r0.head != NULL;
-					const uint32 approxReadSize = r0.seqLen * (1 + (uint32)usesQuality) + (uint32)usesHeaders*r0.headLen*1.2;
-					const uint32 approxChunkSize = records.size() * approxReadSize;
+					const uint64 approxReadSize = (uint64)r0.seqLen * (1 + (uint64)usesQuality) + (uint64)usesHeaders*r0.headLen*1.2;
+					const uint64 approxChunkSize = records.size() * approxReadSize;
 
 					if (binBuffers.count(sig) == 0)
 						binBuffers[sig] = new BinBuffer(BinBuffer::MinRecordsToStore, MAX(BinBuffer::MinRecordsToStore * approxReadSize, approxChunkSize));
@@ -154,7 +154,7 @@ void BinEncoderSE::Run()
 					//
 					for (const auto& rec : records)
 					{
-						const uint32 readSize = rec->seqLen * (1 + (uint32)usesQuality) + rec->headLen;
+						const uint64 readSize = (uint64)rec->seqLen * (1 + (uint64)usesQuality) + (uint64)rec->headLen;
 						ASSERT(buffer.size + readSize < buffer.data.Size());
 
 						char* bufferPtr = (char*)buffer.data.Pointer() + buffer.size;
@@ -401,8 +401,8 @@ void BinEncoderPE::Run()
 					const FastqRecord& r0 = *records.back();        // back to have the max id number
 					const bool usesQuality = r0.qua != NULL;
 					const bool usesHeaders = r0.head != NULL;
-					const uint32 approxRecordSize = (r0.seqLen + r0.auxLen) * (1 + (uint32)usesQuality) + (uint32)usesHeaders * r0.headLen * 1.2;
-					const uint32 approxChunkSize = records.size() * approxRecordSize;
+					const uint64 approxRecordSize = (uint64)(r0.seqLen + r0.auxLen) * (1 + (uint64)usesQuality) + (uint64)usesHeaders * (uint64)r0.headLen * 1.2;
+					const uint64 approxChunkSize = records.size() * approxRecordSize;
 
 
 					if (binBuffers.count(sig) == 0)
@@ -419,7 +419,7 @@ void BinEncoderPE::Run()
 					//
 					for (const auto& rec : records)
 					{
-						const uint32 readSize = (rec->seqLen + rec->auxLen) * (1 + (uint32)usesQuality) + rec->headLen;
+						const uint64 readSize = (uint64)(rec->seqLen + rec->auxLen) * (1 + (uint64)usesQuality) + (uint64)rec->headLen;
 						char* bufferPtr = (char*)buffer.data.Pointer() + buffer.size;
 
 						bufRecords.push_back(FastqRecord(*rec));

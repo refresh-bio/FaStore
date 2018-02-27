@@ -40,8 +40,8 @@ public:
 protected:
 	struct ArchiveFileHeader
 	{
-		static const uint32 ReservedBytes = 8;
-		static const uint32 HeaderSize = 8 + 8 + ReservedBytes;
+		static const uint64 ReservedBytes = 8;
+		static const uint64 HeaderSize = 8 + 8 + ReservedBytes;
 
 		uint64 footerOffset;
 		uint64 footerSize;

@@ -91,7 +91,7 @@ void IStoreBase::ReadRawHeader(BaseBlockHeader& header_, BitMemoryReader& reader
 		ASSERT(reader_.Position() == BaseBlockHeader::Size - sizeof(header_.rawIdStreamSize));
 	}
 
-	ASSERT(header_.footerOffset + header_.footerSize <= reader_.Size());
+	ASSERT(header_.footerOffset + (uint64)header_.footerSize <= reader_.Size());
 	ASSERT(header_.recordsCount > 0);
 	ASSERT(header_.recMaxLen > 0);
 	ASSERT(header_.recMaxLen >= header_.recMinLen);
@@ -716,7 +716,7 @@ void ILzCompressorBase::ReadHeader(LzBlockHeader& header_, DataChunk& buffer_)
 		s = blockReader.Get8Bytes();
 		totalBlockSize += s;
 	}
-	ASSERT(totalBlockSize + header_.footerSize == buffer_.size);
+	ASSERT(totalBlockSize + (uint64)header_.footerSize == buffer_.size);
 	if (header_.rawIdStreamSize != 0)
 	{
 		ASSERT(blockReader.Position() == LzBlockHeader::Size(header_.compBufferSizes.size()));
@@ -805,15 +805,15 @@ LzCompressorSE::~LzCompressorSE()
 void LzCompressorSE::SetupBuffers(Buffer& buffer_, std::vector<bool>& ppmdBufferCompMask_, uint32 bufferNum_)
 {
 	uint64 rawOutSize = std::accumulate(blockDesc.header.workBufferSizes.begin(),
-										blockDesc.header.workBufferSizes.end(), 0);
+										blockDesc.header.workBufferSizes.end(), 0ULL);
 
 	// usually the output data is compressed to 1/3-1/4 of the input data, but we want to keep the margin
 	//
 	uint64 preallocSize = rawOutSize;
 
-	if (preallocSize > (1 << 25))
+	if (preallocSize > (uint64)(1 << 25))
 		preallocSize /= 2;
-	else if (preallocSize <= (1 << 10))
+	else if (preallocSize <= (uint64)(1 << 10))
 		preallocSize *= 2;
 
 	if (buffer_.Size() < preallocSize)
@@ -1203,7 +1203,7 @@ void LzCompressorSE::Compress(const std::vector<FastqRecord>& reads_,
 		BitMemoryWriter writer(compBin_.dataBuffer.data, compBin_.dataBuffer.size);
 		StoreRawFooter(blockDesc.footer, writer);
 
-		blockDesc.header.footerSize = writer.Position() - blockDesc.header.footerOffset;
+		blockDesc.header.footerSize = (uint32)(writer.Position() - blockDesc.header.footerOffset);
 		compBin_.dataBuffer.size = writer.Position();
 	}
 
@@ -2529,7 +2529,7 @@ void LzDecompressorSE::Decompress(CompressedFastqBlock &compBin_,
 
 	{
 		BitMemoryReader reader(compBin_.dataBuffer.data,
-							   blockDesc.header.footerOffset + blockDesc.header.footerSize,
+							   blockDesc.header.footerOffset + (uint64)blockDesc.header.footerSize,
 							   blockDesc.header.footerOffset);
 		ReadRawFooter(blockDesc.footer, reader);
 	}
@@ -3428,7 +3428,7 @@ void RawCompressorSE::Compress(const std::vector<FastqRecord>& reads_,
 
 	// prepare the work and output buffer buffer
 	//
-	const uint32 bitsPerLen = blockDesc.isLenConst ? 0 : bit_length(blockDesc.header.recMaxLen - blockDesc.header.recMinLen);
+	const uint64 bitsPerLen = blockDesc.isLenConst ? 0 : bit_length(blockDesc.header.recMaxLen - blockDesc.header.recMinLen);
 	const uint64 dnaPreallocSize = rawDnaStreamSize_ * 2;			// account here for both DNA + quality
 
 	uint64 idPreallocSize = 0;
@@ -3436,11 +3436,11 @@ void RawCompressorSE::Compress(const std::vector<FastqRecord>& reads_,
 	{
 		// estimate prealloc size
 		const auto& r = reads_.front();
-		idPreallocSize = (r.headLen * 1.5) * blockDesc.header.recordsCount;
+		idPreallocSize = (uint64)(r.headLen * 1.5) * blockDesc.header.recordsCount;
 	}
 
-	const uint64 compPreallocSize = dnaPreallocSize + idPreallocSize + (RawBlockHeader::Size)
-									+ (((bitsPerLen > 0) ? blockDesc.header.recordsCount * bitsPerLen : 0));
+	const uint64 compPreallocSize = dnaPreallocSize + idPreallocSize + RawBlockHeader::Size
+									+ (uint64)(((bitsPerLen > 0) ? blockDesc.header.recordsCount * bitsPerLen : 0));
 
 
 	// preapre buffers and readers
@@ -3576,15 +3576,15 @@ void RawCompressorSE::Compress(const std::vector<FastqRecord>& reads_,
 	StoreRawFooter(blockDesc.footer, blockWriter);
 
 	blockDesc.header.footerOffset = endPos;
-	blockDesc.header.footerSize = blockWriter.Position() - blockDesc.header.footerOffset;
+	blockDesc.header.footerSize = (uint32)(blockWriter.Position() - blockDesc.header.footerOffset);
 
 
 	StoreHeader(blockDesc.header, compBin_.dataBuffer);
 
 	compBin_.dataBuffer.size = dnaDataOffset
 			+ blockDesc.header.dnaCompSize + blockDesc.header.quaCompSize
-			+ blockDesc.header.footerSize;
-	ASSERT(compBin_.dataBuffer.size == blockDesc.header.footerOffset + blockDesc.header.footerSize);
+			+ (uint64)blockDesc.header.footerSize;
+	ASSERT(compBin_.dataBuffer.size == blockDesc.header.footerOffset + (uint64)blockDesc.header.footerSize);
 
 
 	// save for debug purposes
@@ -4182,7 +4182,7 @@ void RawDecompressorSE::DecompressRecords(std::vector<FastqRecord>& reads_, Fast
 		ASSERT(blockDesc.isLenConst);
 		rec.seqLen = blockDesc.header.recMinLen;
 
-		ASSERT(bufferPos + rec.seqLen * 2 <= buffer_.size);
+		ASSERT(bufferPos + (uint64)(rec.seqLen * 2) <= buffer_.size);
 
 		rec.seq = dnaBufferPtr + bufferPos;
 		rec.qua = rec.seq + rec.seqLen;
@@ -5466,7 +5466,7 @@ void RawDecompressorPE::DecompressRecords(std::vector<FastqRecord>& reads_, Fast
 		{
 			rec.seqLen = rec.auxLen = blockDesc.header.recMinLen;
 		}
-		ASSERT(bufferPos + (rec.seqLen + rec.auxLen * 2) <= buffer_.size);
+		ASSERT(bufferPos + (uint64)(rec.seqLen + rec.auxLen * 2) <= buffer_.size);
 
 
 		// link dna and quality to output chunk buffer

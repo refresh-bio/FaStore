@@ -29,7 +29,7 @@ class IBinFile
 public:
 	struct BinFileFooter
 	{
-		static const uint32 ParametersSize = sizeof(BinModuleConfig);
+		static const uint64 ParametersSize = sizeof(BinModuleConfig);
 
 		struct BlockMetaData : public BinaryBinDescriptor
 		{
@@ -105,8 +105,8 @@ public:
 protected:
 	struct BinFileHeader
 	{
-		static const uint32 ReservedBytes = 7;
-		static const uint32 HeaderSize = 4*8 + 1 + ReservedBytes;
+		static const uint64 ReservedBytes = 7;
+		static const uint64 HeaderSize = 4*8 + 1 + ReservedBytes;
 
 		uint64 footerOffset;
 		uint64 recordsCount;
