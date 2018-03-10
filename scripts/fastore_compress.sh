@@ -25,7 +25,7 @@ print_usage()
 	echo ""
 	echo "usage: bash $0 <mode> [--fast] [--threads <th>]"
 	echo "          --in <in.fq> [--pair <pair.fq>] --out <archive>"
-	echo "          [--verbose] [--help]"
+	echo "          [--signature] [--verbose] [--help]"
 	echo ""
 	echo "where:"
 	echo "    <mode> specifies the compression mode which can be one of:" 
@@ -41,6 +41,7 @@ print_usage()
 	echo "                       will assume that the reads are paired with the ones from"
 	echo "                       the file specified by '--in'."
 	echo "    --out <archive>  - the prefix of the output archive files"
+	echo "    --signature <n>  - the length of the signature (default: 8)"
 	echo "    --verbose        - print additional information while compressing"
 	echo "    --help           - displays this message"
 	echo ""
@@ -89,6 +90,9 @@ do
 		--threads)
 			THREADS="$2"
 			shift 2;;
+		--signature)
+			SIG_LEN="$2"
+			shift 2;;
 		--verbose)
 			VERBOSE=1
 			shift 1;;
@@ -117,6 +121,10 @@ if [ -z ${THREADS+x} ]; then
 	THREADS=1
 fi
 
+if [ -z ${SIG_LEN+x} ]; then
+	SIG_LEN=8
+fi
+
 if [ -z ${OUT_PFX+x} ]; then
 	log "WARN: no output files prefix name has been specified --> setting to OUT"
 	OUT_PFX="OUT"
@@ -135,11 +143,11 @@ esac
 
 # set processing params
 #
-PAR_BIN_C1="-p8 -s0 -b256"
+PAR_BIN_C1="-p$SIG_LEN -s0 -b256"
 PAR_REBIN_C1="-r -w1024 -W1024"
 PAR_PACK_C1="-r -f256 -c10 -d8 -w1024 -W1024"
 
-PAR_BIN_C0="-p8 -s10 -b256"
+PAR_BIN_C0="-p$SIG_LEN -s10 -b256"
 PAR_PACK_C0="-f256 -c10 -d8 -w256 -W256"
 
 TH_BIN=$THREADS
