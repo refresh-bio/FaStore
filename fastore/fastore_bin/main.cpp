@@ -15,7 +15,7 @@
 #include "BinModule.h"
 #include "Utils.h"
 #include "Thread.h"
-#include "version.h"
+#include "../version.h"
 #include "QVZ.h"
 
 
@@ -45,9 +45,7 @@ void usage()
 {
 	std::cerr << "\n\n\t\t--- FaStore ---\n\n\n";
 	std::cerr << "fastore_bin -- FASTQ reads binning tool\n\n";
-#ifndef __APPLE__
 	std::cerr << "Version: " << GetAppVersion() << " @ (" << GetCompilationTime() << ")\n";
-#endif
 	std::cerr << "Authors:  Lukasz Roguski\n          Idoia Ochoa\n          Mikel Hernaez\n          Sebastian Deorowicz\n\n\n";
 
 	std::cerr << "usage: \tfastore_bin <e|d> [options]\n";

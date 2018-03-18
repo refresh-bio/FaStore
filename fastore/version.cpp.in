@@ -1,0 +1,17 @@
+#include "version.h"
+
+#define FASTORE_VERSION_MAJOR "@FASTORE_VERSION_MAJOR@"
+#define FASTORE_VERSION_MINOR "@FASTORE_VERSION_MINOR@"
+#define FASTORE_VERSION_PATH  "@FASTORE_VERSION_PATH@"
+
+std::string GetCompilationTime()
+{
+	return std::string(__DATE__) + " -- " + std::string(__TIME__);
+}
+
+std::string GetAppVersion()
+{
+	return std::string(FASTORE_VERSION_MAJOR) + 
+		  "." + std::string(FASTORE_VERSION_MINOR) + 
+		  "." + std::string(FASTORE_VERSION_PATH);
+}

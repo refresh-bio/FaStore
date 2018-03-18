@@ -415,6 +415,6 @@ void print_pmf(struct pmf_t *pmf) {
 		recalculate_pmf(pmf);
 
 	for (i = 0; i < pmf->alphabet->size; ++i) {
-		printf("<%d>: %.5f (%ld/%ld)\n", pmf->alphabet->symbols[i], pmf->pmf[i], pmf->counts[i], pmf->total);
+		printf("<%d>: %.5f (%llu/%llu)\n", pmf->alphabet->symbols[i], pmf->pmf[i], pmf->counts[i], pmf->total);
 	}
 }

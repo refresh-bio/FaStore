@@ -17,7 +17,8 @@
 
 #include "../fastore_bin/Utils.h"
 #include "../fastore_bin/Thread.h"
-#include "../fastore_bin/version.h"
+
+#include "../version.h"
 
 uint32 InputArguments::AvailableCoresNumber = mt::thread::hardware_concurrency();
 uint32 InputArguments::DefaultThreadNumber = MIN(8, InputArguments::AvailableCoresNumber);
@@ -45,9 +46,7 @@ void usage()
 {
 	std::cerr << "\n\n\t\t--- FaStore ---\n\n\n";
 	std::cerr << "fastore_pack -- FASTQ reads compression tool\n";
-#ifndef __APPLE__	
 	std::cerr << "Version: " << GetAppVersion() << " @ (" << GetCompilationTime() << ")\n";
-#endif
 	std::cerr << "Authors:  Lukasz Roguski\n          Idoia Ochoa\n          Mikel Hernaez\n          Sebastian Deorowicz\n\n\n";
 
 	std::cerr << "usage:\tfastore_pack <e|d> [options] -i<input_file> -o<output_file>\n";

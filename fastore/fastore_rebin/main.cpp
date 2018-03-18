@@ -9,7 +9,8 @@
 #include "../fastore_bin/Globals.h"
 #include "../fastore_bin/Utils.h"
 #include "../fastore_bin/Thread.h"
-#include "../fastore_bin/version.h"
+
+#include "../version.h"
 
 #include <iostream>
 #include <string.h>
@@ -45,9 +46,7 @@ void usage()
 {
 	std::cerr << "\n\n\t\t--- FaStore ---\n\n\n";
 	std::cerr << "fastore_rebin -- FASTQ reads re-binning tool\n";
-#ifndef __APPLE__	
 	std::cerr << "Version: " << GetAppVersion() << " @ (" << GetCompilationTime() << ")\n";
-#endif
 	std::cerr << "Authors:  Lukasz Roguski\n          Idoia Ochoa\n          Mikel Hernaez\n          Sebastian Deorowicz\n\n\n";
 
 	std::cerr << "usage:\tfastore_rebin <e|d> [params]\n";
