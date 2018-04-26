@@ -10,7 +10,7 @@
 #ifndef H_BINCOMPRESSOR
 #define H_BINCOMPRESSOR
 
-#include "../fastore_bin/Globals.h"
+#include "../core/Globals.h"
 
 #include <string>
 #include <deque>
@@ -20,22 +20,19 @@
 
 #include "Params.h"
 #include "CompressedBlockData.h"
-#include "ReadsClassifier.h"
 #include "ContigBuilder.h"
 
-#include "../fastore_bin/BitMemory.h"
-#include "../fastore_bin/Params.h"
-#include "../fastore_bin/FastqRecord.h"
-#include "../fastore_bin/FastqCategorizer.h"
+#include "../core/ReadsClassifier.h"
+#include "../core/BitMemory.h"
+#include "../core/FastqRecord.h"
+#include "../core/FastqCategorizer.h"
 #include "../rle/RleEncoder.h"
 #include "../rc/ContextEncoder.h"
 #include "../ppmd/PPMd.h"
-
+#include "../qvz/QVZ.h"
+#include "../qvz/qv_compressor.h"
+#include "../fastore_bin/Params.h"
 #include "../fastore_rebin/Params.h"
-#include "qv_compressor.h"
-
-#include "../fastore_bin/QVZ.h"
-
 
 #define ENC_HR_AC 0
 

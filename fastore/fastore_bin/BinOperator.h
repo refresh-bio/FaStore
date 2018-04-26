@@ -10,21 +10,19 @@
 #ifndef H_BINOPERATOR
 #define H_BINOPERATOR
 
-#include "Globals.h"
-#include "DataPool.h"
-#include "DataQueue.h"
-#include "BinBlockData.h"
+#include "../core/Globals.h"
+
 #include "Params.h"
-#include "FastqRecord.h"
-
-#include <vector>
-#include <map>
-
-#include "FastqStream.h"
 #include "BinFile.h"
-#include "FastqParser.h"
-#include "FastqCategorizer.h"
-#include "FastqPacker.h"
+
+#include "../core/BinBlockData.h"
+#include "../core/DataPool.h"
+#include "../core/DataQueue.h"
+#include "../core/FastqRecord.h"
+#include "../core/FastqStream.h"
+#include "../core/FastqParser.h"
+#include "../core/FastqCategorizer.h"
+#include "../core/FastqPacker.h"
 
 
 // operators for multi threaded processing

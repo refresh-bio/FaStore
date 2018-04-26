@@ -7,17 +7,19 @@
   Authors: Lukasz Roguski, Idoia Ochoa, Mikel Hernaez & Sebastian Deorowicz
 */
 
-#include "../fastore_bin/Globals.h"
-
-#include "CompressorOperator.h"
-#include "BinFileExtractor.h"
-#include "ArchiveFile.h"
-#include "FastqCompressor.h"
-#include "../fastore_bin/FastqParser.h"
-#include "../fastore_rebin/NodesPacker.h"
+#include "../core/Globals.h"
 
 #include <iostream>
 #include <memory>
+
+#include "CompressorOperator.h"
+#include "ArchiveFile.h"
+#include "FastqCompressor.h"
+
+#include "../core/FastqParser.h"
+#include "../core/NodesPacker.h"
+#include "../fastore_rebin/BinFileExtractor.h"
+
 
 void BinPartsCompressor::Run()
 {

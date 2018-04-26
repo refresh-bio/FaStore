@@ -2,73 +2,69 @@ TEMPLATE = app
 CONFIG += console
 CONFIG -= app_bundle
 CONFIG -= qt
-
-QMAKE_CXXFLAGS += -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE
-#QMAKE_CXXFLAGS += -DUSE_BOOST_THREAD
-QMAKE_CXXFLAGS += -std=c++11 -pthread
 CONFIG += c++11
 
+QMAKE_CXXFLAGS += -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE
+QMAKE_CXXFLAGS += -std=c++11 -pthread
+
 LIBS += -lz
-#LIBS += -lboost_thread -lboost_system
 LIBS += -lpthread
 
 
-SOURCES += main.cpp \
-    ../fastore_bin/FileStream.cpp \
-    ../fastore_bin/FastqStream.cpp \
-    ../fastore_bin/BinFile.cpp \
-    ../fastore_bin/FastqCategorizer.cpp \
-    ../fastore_bin/FastqPacker.cpp \
-    ../fastore_bin/BinOperator.cpp \
-    ../fastore_bin/FastqParser.cpp \
-    ../fastore_pack/BinFileExtractor.cpp \
-    ../fastore_pack/ReadsClassifier.cpp \
-    ../fastore_bin/version.cpp \
-    ../fastore_bin/Stats.cpp \
-    RebinOperator.cpp \
-    RebinModule.cpp \
-    DnaRebalancer.cpp \
-    NodesPacker.cpp \
-    ../fastore_bin/QVZ.cpp \
-    ../fastore_pack/pmf.cpp \
-    ../fastore_pack/well.cpp \
-    ../fastore_pack/distortion.cpp \
-    ../fastore_pack/quantizer.cpp \
-    ../fastore_pack/codebook.cpp
-
-HEADERS += \
-    ../fastore_bin/FileStream.h \
-    ../fastore_bin/DataStream.h \
-    ../fastore_bin/Globals.h \
-    ../fastore_bin/Buffer.h \
-    ../fastore_bin/Utils.h \
-    ../fastore_bin/BitMemory.h \
-    ../fastore_bin/BinFile.h \
-    ../fastore_bin/DataQueue.h \
-    ../fastore_bin/DataPool.h \
-    ../fastore_bin/Exception.h \
-    ../fastore_bin/BinBlockData.h \
-    ../fastore_bin/Params.h \
-    ../fastore_bin/Thread.h \
-    ../fastore_bin/FastqRecord.h \
-    ../fastore_bin/FastqCategorizer.h \
-    ../fastore_bin/FastqPacker.h \
-    ../fastore_bin/BinOperator.h \
-    ../fastore_bin/FastqParser.h \
-    ../fastore_pack/BinFileExtractor.h \
-    ../fastore_pack/ReadsClassifier.h \
-    ../fastore_pack/Params.h \
-    ../fastore_pack/version.h \
-    main.h \
+HEADERS += main.h \
     Params.h \
     RebinModule.h \
     RebinOperator.h \
     DnaRebalancer.h \
-    NodesPacker.h \
-    ../fastore_bin/QVZ.h \
-    ../fastore_pack/pmf.h \
-    ../fastore_pack/well.h \
-    ../fastore_pack/distortion.h \
-    ../fastore_pack/quantizer.h \
-    ../fastore_pack/codebook.h
+    BinFileExtractor.h \
+    ../fastore_bin/BinFile.h \
+    ../fastore_bin/BinOperator.h \
+    ../fastore_bin/Params.h \
+    ../fastore_pack/Params.h \
+    ../core/BinBlockData.h \
+    ../core/NodesPacker.h \
+    ../core/FileStream.h \
+    ../core/DataStream.h \
+    ../core/Globals.h \
+    ../core/Buffer.h \
+    ../core/Utils.h \
+    ../core/BitMemory.h \
+    ../core/DataQueue.h \
+    ../core/DataPool.h \
+    ../core/Exception.h \
+    ../core/Thread.h \
+    ../core/FastqRecord.h \
+    ../core/FastqCategorizer.h \
+    ../core/FastqPacker.h \
+    ../core/FastqParser.h \
+    ../core/ReadsClassifier.h \
+    ../core/version.h \
+    ../qvz/QVZ.h \
+    ../qvz/pmf.h \
+    ../qvz/well.h \
+    ../qvz/distortion.h \
+    ../qvz/quantizer.h \
+    ../qvz/codebook.h
 
+SOURCES += main.cpp \
+    BinFileExtractor.cpp \
+    RebinOperator.cpp \
+    RebinModule.cpp \
+    DnaRebalancer.cpp \
+    ../fastore_bin/BinFile.cpp \
+    ../fastore_bin/BinOperator.cpp \
+    ../core/FileStream.cpp \
+    ../core/FastqStream.cpp \
+    ../core/FastqCategorizer.cpp \
+    ../core/FastqPacker.cpp \
+    ../core/FastqParser.cpp \
+    ../core/ReadsClassifier.cpp \
+    ../core/NodesPacker.cpp \
+    ../core/version.cpp \
+    ../qvz/Stats.cpp \
+    ../qvz/QVZ.cpp \
+    ../qvz/pmf.cpp \
+    ../qvz/well.cpp \
+    ../qvz/distortion.cpp \
+    ../qvz/quantizer.cpp \
+    ../qvz/codebook.cpp

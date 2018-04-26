@@ -24,7 +24,7 @@
 #include <string.h>
 
 #include "codebook.h"
-#include "../fastore_bin/BitMemory.h"
+#include "../core/BitMemory.h"
 
 #define m_arith  22
 

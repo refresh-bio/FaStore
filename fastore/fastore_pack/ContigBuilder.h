@@ -9,13 +9,14 @@
 #ifndef CONSENSUSBUILDER_H
 #define CONSENSUSBUILDER_H
 
-#include "../fastore_bin/FastqRecord.h"
-#include "../fastore_bin/Params.h"
-#include "ReadsClassifier.h"
+#include "../core/Globals.h"
 
 #include <vector>
 #include <map>
 #include <algorithm>
+
+#include "../core/FastqRecord.h"
+#include "../core/ReadsClassifier.h"
 
 
 /**
@@ -90,6 +91,36 @@ struct ContigBuildInfo
 		consensus.range.first = seqLen_;
 		consensus.range.second = seqLen_;
 	}
+};
+
+
+struct ReadsContigBuilderParams
+{
+	struct Default
+	{
+		static const uint32 BeginCut = 2;
+		static const uint32 EndCut = 2;
+		static const uint32 MaxNewVariantsPerRead = 1;
+		static const uint32 MaxRecordShiftDiff = 0;			// INFO: 0 - auto, half of the length (tests: 42)
+		static const uint32 MaxHammingDistance = 8;			// TODO: a better metric?
+		static const uint32 MinConsensusSize = 10;
+	};
+
+	uint32 beginCut;
+	uint32 endCut;
+	uint32 maxNewVariantsPerRead;
+	uint32 maxRecordShiftDifference;
+	uint32 maxHammingDistance;
+	uint32 minConsensusSize;
+
+	ReadsContigBuilderParams()
+		:	beginCut(Default::BeginCut)
+		,	endCut(Default::EndCut)
+		,	maxNewVariantsPerRead(Default::MaxNewVariantsPerRead)
+		,	maxRecordShiftDifference(Default::MaxRecordShiftDiff)
+		,	maxHammingDistance(Default::MaxHammingDistance)
+		,	minConsensusSize(Default::MinConsensusSize)
+	{}
 };
 
 

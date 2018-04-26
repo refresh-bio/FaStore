@@ -10,10 +10,8 @@
 #ifndef H_DNAPACKER
 #define H_DNAPACKER
 
-#include "Params.h"
 #include "BinBlockData.h"
 #include "FastqRecord.h"
-
 
 
 /**

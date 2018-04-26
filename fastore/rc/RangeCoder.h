@@ -11,8 +11,8 @@
 #ifndef H_RANGECODER
 #define H_RANGECODER
 
-#include "../fastore_bin/Globals.h"
-#include "../fastore_bin/BitMemory.h"
+#include "../core/Globals.h"
+#include "../core/BitMemory.h"
 
 
 class RangeCoder

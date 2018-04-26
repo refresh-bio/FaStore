@@ -9,7 +9,7 @@
 #ifndef VERSION_H
 #define VERSION_H
 
-#include "fastore_bin/Globals.h"
+#include "Globals.h"
 #include <string>
 
 // WARN: version.cpp file should be automated automatically!!!

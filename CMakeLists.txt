@@ -29,14 +29,14 @@ endif()
 # directories setup
 #
 set(FASTORE_SRC_DIR fastore/)
-include_directories(${FASTORE_SRC_DIR})
 
-set(FASTORE_BIN_DIR fastore/fastore_bin)
-set(FASTORE_REBIN_DIR fastore/fastore_rebin)
-set(FASTORE_PACK_DIR fastore/fastore_pack)
+set(FASTORE_CORE_DIR  ${FASTORE_SRC_DIR}/core)
+set(FASTORE_BIN_DIR   ${FASTORE_SRC_DIR}/fastore_bin)
+set(FASTORE_REBIN_DIR ${FASTORE_SRC_DIR}/fastore_rebin)
+set(FASTORE_PACK_DIR  ${FASTORE_SRC_DIR}/fastore_pack)
 
-set(QVZ_DIR fastore/fastore_pack)
-set(PPMD_DIR fastore/ppmd)
+set(QVZ_DIR  ${FASTORE_SRC_DIR}/qvz)
+set(PPMD_DIR ${FASTORE_SRC_DIR}/ppmd)
 
 
 # qvz source files
@@ -47,7 +47,8 @@ set(QVZ_CORE_SRC ${QVZ_DIR}/codebook.cpp
 	${QVZ_DIR}/quantizer.cpp
 	${QVZ_DIR}/util.cpp
 	${QVZ_DIR}/well.cpp
-	${FASTORE_BIN_DIR}/QVZ.cpp
+	${QVZ_DIR}/QVZ.cpp
+	${QVZ_DIR}/Stats.cpp
 	)
 
 set(QVZ_COMP_SRC ${QVZ_DIR}/qv_compressor.cpp
@@ -65,9 +66,10 @@ set(PPMD_SRC ${PPMD_DIR}/PPMd.cpp ${PPMD_DIR}/Model.cpp)
 #
 set(VERSION_FILE version.cpp)
 set(VERSION_SRC "${PROJECT_BINARY_DIR}/${VERSION_FILE}")
+include_directories(${FASTORE_CORE_DIR})
 
 configure_file( 
-	${FASTORE_SRC_DIR}/${VERSION_FILE}.in
+	${FASTORE_CORE_DIR}/${VERSION_FILE}.in
 	${PROJECT_BINARY_DIR}/${VERSION_FILE}
 	)
 
@@ -75,18 +77,19 @@ configure_file(
 # fastore_bin configuration
 #
 #file(GLOB FASTORE_BIN_SRC "fastore/fastore_bin/*.cpp")
-set(FASTORE_CORE_SRC ${FASTORE_BIN_DIR}/BinFile.cpp
-	${FASTORE_BIN_DIR}/FastqPacker.cpp
-	${FASTORE_BIN_DIR}/FastqCategorizer.cpp 
-	${FASTORE_BIN_DIR}/FastqParser.cpp
-	${FASTORE_BIN_DIR}/FastqStream.cpp
-	${FASTORE_BIN_DIR}/FileStream.cpp
-	${FASTORE_BIN_DIR}/Stats.cpp
+set(FASTORE_CORE_SRC ${FASTORE_CORE_DIR}/FastqPacker.cpp
+	${FASTORE_CORE_DIR}/FastqCategorizer.cpp
+	${FASTORE_CORE_DIR}/ReadsClassifier.cpp
+	${FASTORE_CORE_DIR}/FastqParser.cpp
+	${FASTORE_CORE_DIR}/FastqStream.cpp
+	${FASTORE_CORE_DIR}/NodesPacker.cpp
+	${FASTORE_CORE_DIR}/FileStream.cpp
 	)
 
 set(FASTORE_BIN_SRC ${FASTORE_BIN_DIR}/main.cpp
 	${FASTORE_BIN_DIR}/BinModule.cpp
 	${FASTORE_BIN_DIR}/BinOperator.cpp
+	${FASTORE_BIN_DIR}/BinFile.cpp
 	${FASTORE_CORE_SRC}
 	)
 
@@ -100,14 +103,12 @@ target_link_libraries(fastore_bin "${CXX_LD_FLAGS}")
 # fastore_rebin configuration
 #
 set(FASTORE_REBIN_SRC ${FASTORE_REBIN_DIR}/main.cpp
-	${FASTORE_REBIN_DIR}/NodesPacker.cpp
 	${FASTORE_REBIN_DIR}/RebinOperator.cpp
 	${FASTORE_REBIN_DIR}/RebinModule.cpp
 	${FASTORE_REBIN_DIR}/DnaRebalancer.cpp
-	${FASTORE_PACK_DIR}/BinFileExtractor.cpp
-	${FASTORE_PACK_DIR}/ContigBuilder.cpp
-	${FASTORE_PACK_DIR}/ReadsClassifier.cpp
+	${FASTORE_REBIN_DIR}/BinFileExtractor.cpp
 	${FASTORE_BIN_DIR}/BinOperator.cpp
+	${FASTORE_BIN_DIR}/BinFile.cpp
 	${FASTORE_CORE_SRC}
 	)
 
@@ -124,11 +125,10 @@ set(FASTORE_PACK_SRC ${FASTORE_PACK_DIR}/main.cpp
 	${FASTORE_PACK_DIR}/CompressorModule.cpp
 	${FASTORE_PACK_DIR}/CompressorOperator.cpp
 	${FASTORE_PACK_DIR}/ArchiveFile.cpp
-	${FASTORE_PACK_DIR}/BinFileExtractor.cpp
 	${FASTORE_PACK_DIR}/FastqCompressor.cpp
-	${FASTORE_PACK_DIR}/ReadsClassifier.cpp
 	${FASTORE_PACK_DIR}/ContigBuilder.cpp
-	${FASTORE_REBIN_DIR}/NodesPacker.cpp
+	${FASTORE_REBIN_DIR}/BinFileExtractor.cpp
+	${FASTORE_BIN_DIR}/BinFile.cpp
 	${FASTORE_CORE_SRC}
 	)
 

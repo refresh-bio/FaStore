@@ -10,15 +10,14 @@
 #ifndef H_DNARCHFILE
 #define H_DNARCHFILE
 
-#include "../fastore_bin/Globals.h"
+#include "../core/Globals.h"
 
 #include "Params.h"
 #include "CompressedBlockData.h"
 
-#include "../fastore_bin/FileStream.h"
+#include "../core/FileStream.h"
 #include "../fastore_bin/Params.h"
-
-#include "../fastore_bin/QVZ.h"
+#include "../qvz/QVZ.h"
 
 
 /**
@@ -137,6 +136,5 @@ protected:
 	void ReadFileHeader();
 	void ReadFileFooter();
 };
-
 
 #endif // H_DNARCHFILE

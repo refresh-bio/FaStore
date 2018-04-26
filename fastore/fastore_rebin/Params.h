@@ -9,11 +9,12 @@
 #ifndef H_REBINPARAMS
 #define H_REBINPARAMS
 
-#include "../fastore_bin/Globals.h"
-#include "../fastore_bin/Params.h"
-#include "../fastore_pack/Params.h"
+#include "../core/Globals.h"
 
 #include <map>
+
+#include "../fastore_bin/Params.h"
+#include "../fastore_pack/Params.h"
 
 
 struct BinBalanceParameters

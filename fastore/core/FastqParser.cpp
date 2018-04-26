@@ -9,7 +9,9 @@
 
 #include "Globals.h"
 #include "FastqParser.h"
-#include "Stats.h"
+
+#include "../qvz/Stats.h"	// for updating stats definition
+
 
 bool SingleDnaRecordParser::ReadLine(uchar *str_, uint32& len_, uint32& size_)
 {

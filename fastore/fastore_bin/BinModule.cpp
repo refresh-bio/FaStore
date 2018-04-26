@@ -7,21 +7,22 @@
   Authors: Lukasz Roguski, Idoia Ochoa, Mikel Hernaez & Sebastian Deorowicz
 */
 
-#include "Globals.h"
+#include "../core/Globals.h"
 
 #include <vector>
 #include <array>
 #include <iostream>
 
 #include "BinModule.h"
-#include "FastqStream.h"
-#include "FastqParser.h"
-#include "FastqPacker.h"
-#include "FastqCategorizer.h"
-#include "BinFile.h"
 #include "BinOperator.h"
-#include "Exception.h"
-#include "Thread.h"
+#include "BinFile.h"
+
+#include "../core/FastqStream.h"
+#include "../core/FastqParser.h"
+#include "../core/FastqPacker.h"
+#include "../core/FastqCategorizer.h"
+#include "../core/Exception.h"
+#include "../core/Thread.h"
 
 
 void BinModuleSE::Fastq2Bin(const std::vector<std::string> &inFastqFiles_, const std::string &outBinFile_,

@@ -10,7 +10,7 @@
 #ifndef H_CONTEXTENCODER
 #define H_CONTEXTENCODER
 
-#include "../fastore_bin/Globals.h"
+#include "../core/Globals.h"
 
 #include "RangeCoder.h"
 #include "SymbolCoderRC.h"

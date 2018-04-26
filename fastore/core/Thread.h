@@ -15,7 +15,7 @@
 #include <thread>
 #include <mutex>
 #include <condition_variable>
-namespace mt = std;
 
+namespace mt = std;
 
 #endif // H_THREAD

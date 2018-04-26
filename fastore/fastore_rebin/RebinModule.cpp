@@ -6,28 +6,24 @@
   Authors: Lukasz Roguski, Idoia Ochoa, Mikel Hernaez & Sebastian Deorowicz
 */
 
-#include "../fastore_bin/Globals.h"
+#include "../core/Globals.h"
 
 #include <vector>
 #include <iostream>
+#include <stdio.h>
 
 #include "RebinModule.h"
 #include "RebinOperator.h"
 #include "DnaRebalancer.h"
-#include "NodesPacker.h"
+#include "BinFileExtractor.h"
 
-#include "../fastore_bin/FastqCategorizer.h"
-
+#include "../core/NodesPacker.h"
+#include "../core/Exception.h"
+#include "../core/Thread.h"
+#include "../core/FastqCategorizer.h"
 #include "../fastore_bin/BinFile.h"
 #include "../fastore_bin/BinOperator.h"
-#include "../fastore_bin/Exception.h"
-#include "../fastore_bin/Thread.h"
 
-#include "../fastore_pack/BinFileExtractor.h"
-
-
-
-#include <stdio.h>
 
 void RebinModule::Bin2Bin(const std::string &inBinFile_,
 							const std::string &outBinFile_,

@@ -7,19 +7,19 @@
   Authors: Lukasz Roguski, Idoia Ochoa, Mikel Hernaez & Sebastian Deorowicz
 */
 
-#include "Globals.h"
+#include "../core/Globals.h"
 
 #include <vector>
 #include <map>
+#include <iostream>
 
 #include "BinOperator.h"
-#include "FastqStream.h"
 #include "BinFile.h"
-#include "FastqParser.h"
-#include "FastqCategorizer.h"
-#include "FastqPacker.h"
 
-#include <iostream>
+#include "../core/FastqStream.h"
+#include "../core/FastqParser.h"
+#include "../core/FastqCategorizer.h"
+#include "../core/FastqPacker.h"
 
 
 void BinChunkWriter::Run()

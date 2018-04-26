@@ -6,17 +6,17 @@
   Authors: Lukasz Roguski, Idoia Ochoa, Mikel Hernaez & Sebastian Deorowicz
 */
 
-#include "../fastore_bin/Globals.h"
-#include "../fastore_bin/Utils.h"
-#include "../fastore_bin/Thread.h"
-
-#include "../version.h"
+#include "../core/Globals.h"
 
 #include <iostream>
 #include <string.h>
 
 #include "main.h"
 #include "RebinModule.h"
+
+#include "../core/Utils.h"
+#include "../core/Thread.h"
+#include "../core/version.h"
 
 
 uint32 InputArguments::AvailableCoresNumber = mt::thread::hardware_concurrency();

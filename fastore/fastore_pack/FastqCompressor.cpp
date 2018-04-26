@@ -7,24 +7,22 @@
   Authors: Lukasz Roguski, Idoia Ochoa, Mikel Hernaez & Sebastian Deorowicz
 */
 
-#include "../fastore_bin/Globals.h"
+#include "../core/Globals.h"
 
 #include <string.h>
 #include <queue>
 #include <algorithm>
 #include <iostream>
 #include <numeric>
+#include <stdio.h>
 
 #include "FastqCompressor.h"
 #include "CompressedBlockData.h"
 
-#include "../fastore_bin/FastqPacker.h"
+#include "../core/FastqPacker.h"
 #include "../rle/rle.h"
 #include "../ppmd/PPMd.h"
-#include "quantizer.h"
-
-
-#include <stdio.h>
+#include "../qvz/quantizer.h"
 
 
 // IFastqCompressor

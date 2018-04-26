@@ -9,11 +9,12 @@
 #ifndef H_REBINMODULE
 #define H_REBINMODULE
 
-#include "../fastore_bin/Globals.h"
-#include "../fastore_bin/FastqRecord.h"
+#include "../core/Globals.h"
 
 #include <string>
 #include <vector>
+
+#include "../core/FastqRecord.h"
 
 #include "Params.h"
 

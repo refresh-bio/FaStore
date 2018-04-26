@@ -2,37 +2,38 @@ TEMPLATE = app
 CONFIG += console
 CONFIG -= app_bundle
 CONFIG -= qt
-
-QMAKE_CXXFLAGS += -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE
-#QMAKE_CXXFLAGS += -DUSE_BOOST_THREAD
-
 CONFIG += c++11
+
 QMAKE_CXXFLAGS += -std=c++11
+QMAKE_CXXFLAGS += -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE
 
 LIBS += -lpthread
 LIBS += -lz
-#LIBS += -lboost_thread -lboost_system
 
 
-HEADERS += \
-    ../fastore_bin/utils.h \
-    ../fastore_bin/Globals.h \
-    ../fastore_bin/FileStream.h \
-    ../fastore_bin/FastqParser.h \
-    ../fastore_bin/FastqPacker.h \
-    ../fastore_bin/FastqRecord.h \
-    ../fastore_bin/DataStream.h \
-    ../fastore_bin/Buffer.h \
-    ../fastore_bin/BitMemory.h \
-    ../fastore_bin/BinFile.h \
-    ../fastore_bin/FastqCategorizer.h \
-    ../fastore_bin/version.h \
-    ../fastore_bin/Node.h \
-    ../fastore_rebin/NodesPacker.h \
-    BinFileExtractor.h \
+HEADERS += main.h \
     ArchiveFile.h \
     CompressorModule.h \
     CompressorOperator.h \
+    CompressedBlockData.h \
+    Params.h \
+    FastqCompressor.h \
+    ContigBuilder.h \
+    ../fastore_bin/BinFile.h \
+    ../fastore_rebin/BinFileExtractor.h \
+    ../core/Globals.h \
+    ../core/FileStream.h \
+    ../core/FastqParser.h \
+    ../core/FastqPacker.h \
+    ../core/FastqRecord.h \
+    ../core/DataStream.h \
+    ../core/Buffer.h \
+    ../core/BitMemory.h \
+    ../core/FastqCategorizer.h \
+    ../core/Node.h \
+    ../core/NodesPacker.h \
+    ../core/ReadsClassifier.h \
+    ../core/version.h \
     ../ppmd/PPMd.h \
     ../ppmd/Coder.hpp \
     ../ppmd/PPMd.h \
@@ -43,45 +44,39 @@ HEADERS += \
     ../rc/RangeCoder.h \
     ../rc/SymbolCoderRC.h \
     ../rc/ContextEncoder.h \
-    CompressedBlockData.h \
-    Params.h \
-    main.h \
-    FastqCompressor.h \
-    ReadsClassifier.h \
-    ContigBuilder.h \
-    ../fastore_bin/QVZ.h \
-    pmf.h \
-    well.h \
-    distortion.h \
-    quantizer.h \
-    codebook.h \
-    qv_compressor.h
+    ../qvz/QVZ.h \
+    ../qvz/utils.h \
+    ../qvz/pmf.h \
+    ../qvz/well.h \
+    ../qvz/distortion.h \
+    ../qvz/quantizer.h \
+    ../qvz/codebook.h \
+    ../qvz/qv_compressor.h
 
-SOURCES += \
-    main.cpp \
-    ../fastore_bin/FileStream.cpp \
-    ../fastore_bin/FastqParser.cpp \
-    ../fastore_bin/FastqPacker.cpp \
-    ../fastore_bin/BinFile.cpp \
-    ../fastore_bin/Stats.cpp \
-    ../fastore_bin/FastqCategorizer.cpp \
-    ../fastore_rebin/NodesPacker.cpp \
-    version.cpp \
-    BinFileExtractor.cpp \
+SOURCES += main.cpp \
     FastqCompressor.cpp \
     ArchiveFile.cpp \
     CompressorModule.cpp \
     CompressorOperator.cpp \
+    ContigBuilder.cpp \
+    ../fastore_rebin/BinFileExtractor.cpp \
+    ../fastore_bin/BinFile.cpp \
+    ../core/FileStream.cpp \
+    ../core/FastqParser.cpp \
+    ../core/FastqPacker.cpp \
+    ../core/ReadsClassifier.cpp \
+    ../core/FastqCategorizer.cpp \
+    ../core/NodesPacker.cpp \
+    ../core/version.cpp \
     ../ppmd/Model.cpp \
     ../ppmd/PPMd.cpp \
-    ReadsClassifier.cpp \
-    ContigBuilder.cpp \
-    ../fastore_bin/QVZ.cpp \
-    pmf.cpp \
-    well.cpp \
-    distortion.cpp \
-    quantizer.cpp \
-    codebook.cpp \
-    qv_compressor.cpp \
-    qv_stream.cpp \
-    arith.cpp
+    ../qvz/Stats.cpp \
+    ../qvz/QVZ.cpp \
+    ../qvz/pmf.cpp \
+    ../qvz/well.cpp \
+    ../qvz/distortion.cpp \
+    ../qvz/quantizer.cpp \
+    ../qvz/codebook.cpp \
+    ../qvz/qv_compressor.cpp \
+    ../qvz/qv_stream.cpp \
+    ../qvz/arith.cpp

@@ -9,15 +9,15 @@
 #ifndef H_STATS
 #define H_STATS
 
-#include "Globals.h"
+#include "../core/Globals.h"
 
 #include <vector>
 #include <set>
 #include <algorithm>
 
-#include "FastqRecord.h"
-#include "Buffer.h"
-#include "Utils.h"
+#include "../core/FastqRecord.h"
+#include "../core/Buffer.h"
+#include "../core/Utils.h"
 
 
 /**

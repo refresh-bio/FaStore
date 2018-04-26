@@ -10,7 +10,7 @@
 #ifndef H_BINMODULE
 #define H_BINMODULE
 
-#include "Globals.h"
+#include "../core/Globals.h"
 
 #include <string>
 #include <vector>

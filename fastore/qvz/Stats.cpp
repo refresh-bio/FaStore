@@ -9,12 +9,12 @@
 #include "Stats.h"
 
 // QVZ includes
-#include "../fastore_pack/pmf.h"
-#include "../fastore_pack/well.h"
-#include "../fastore_pack/distortion.h"
-#include "../fastore_pack/quantizer.h"
-#include "../fastore_pack/qv_file.h"
-#include "../fastore_pack/codebook.h"
+#include "pmf.h"
+#include "well.h"
+#include "distortion.h"
+#include "quantizer.h"
+#include "qv_file.h"
+#include "codebook.h"
 
 
 FastqRawBlockStats::FastqRawBlockStats()

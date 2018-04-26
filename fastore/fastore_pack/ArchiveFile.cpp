@@ -7,14 +7,14 @@
   Authors: Lukasz Roguski, Idoia Ochoa, Mikel Hernaez & Sebastian Deorowicz
 */
 
-#include "../fastore_bin/Globals.h"
+#include "../core/Globals.h"
 
 #include <string>
 
 #include "ArchiveFile.h"
 #include "CompressedBlockData.h"
-#include "../fastore_bin/Exception.h"
 
+#include "../core/Exception.h"
 
 
 ArchiveFileWriter::ArchiveFileWriter()

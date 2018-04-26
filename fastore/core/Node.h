@@ -10,9 +10,10 @@
 #define NODE_H
 
 #include "Globals.h"
-#include "FastqRecord.h"
 
 #include <list>
+
+#include "FastqRecord.h"
 
 
 /**

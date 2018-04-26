@@ -146,11 +146,11 @@ void ReadsClassifierSE::ConstructMatchTree(GraphEncodingContext& graph_,
 
 	int8 dnaToIdx[128];
 	std::fill(dnaToIdx, dnaToIdx + 128, -1);
-	dnaToIdx['A'] = 0;
-	dnaToIdx['C'] = 1;
-	dnaToIdx['G'] = 2;
-	dnaToIdx['T'] = 3;
-	dnaToIdx['N'] = 4;
+	dnaToIdx[(int)'A'] = 0;
+	dnaToIdx[(int)'C'] = 1;
+	dnaToIdx[(int)'G'] = 2;
+	dnaToIdx[(int)'T'] = 3;
+	dnaToIdx[(int)'N'] = 4;
 
 
 	// handle the case when provided an auxilaty root

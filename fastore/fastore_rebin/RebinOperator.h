@@ -9,14 +9,14 @@
 #ifndef H_REBINOPERATOR
 #define H_REBINOPERATOR
 
-#include "Params.h"
-#include "../fastore_bin/FastqRecord.h"
-#include "../fastore_bin/Globals.h"
-#include "../fastore_bin/BinOperator.h"
-//#include "../fastore_pack/CompressorOperator.h"
-#include "DnaRebalancer.h"
+#include "../core/Globals.h"
 
-#include "../fastore_pack/BinFileExtractor.h"
+#include "Params.h"
+#include "DnaRebalancer.h"
+#include "BinFileExtractor.h"
+
+#include "../core/FastqRecord.h"
+#include "../fastore_bin/BinOperator.h"
 
 
 typedef TDataPool<BinaryBinBlock> MinimizerPartsPool;

@@ -10,14 +10,15 @@
 #ifndef H_BINFILE
 #define H_BINFILE
 
-#include "Globals.h"
+#include "../core/Globals.h"
 
 #include <vector>
 
-#include "FileStream.h"
 #include "Params.h"
-#include "BinBlockData.h"
-#include "QVZ.h"
+
+#include "../core/BinBlockData.h"
+#include "../core/FileStream.h"
+#include "../qvz/QVZ.h"
 
 
 /**

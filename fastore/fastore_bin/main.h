@@ -8,13 +8,13 @@
 #ifndef H_MAIN
 #define H_MAIN
 
-#include "Globals.h"
+#include "../core/Globals.h"
 
 #include <string>
 #include <vector>
 
 #include "Params.h"
-#include "Stats.h"
+#include "../qvz/Stats.h"
 
 
 struct InputArguments

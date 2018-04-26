@@ -10,28 +10,26 @@
 #ifndef H_DNARCHOPERATOR
 #define H_DNARCHOPERATOR
 
-#include "../fastore_bin/Globals.h"
-#include "../fastore_bin/DataPool.h"
-#include "../fastore_bin/DataQueue.h"
-#include "../fastore_bin/FastqPacker.h"
-#include "../fastore_bin/FastqParser.h"
-
-#include "../fastore_rebin/Params.h"
-#include "../fastore_rebin/RebinOperator.h"
+#include "../core/Globals.h"
 
 #include "Params.h"
 #include "CompressedBlockData.h"
-#include "BinFileExtractor.h"
 #include "ArchiveFile.h"
 #include "FastqCompressor.h"
 #include "CompressorOperator.h"
 
-#include "../fastore_bin/QVZ.h"
+#include "../core/DataPool.h"
+#include "../core/DataQueue.h"
+#include "../core/FastqPacker.h"
+#include "../core/FastqParser.h"
+#include "../qvz/QVZ.h"
+#include "../fastore_rebin/Params.h"
+#include "../fastore_rebin/RebinOperator.h"
+#include "../fastore_rebin/BinFileExtractor.h"
 
 
 typedef TDataQueue<CompressedFastqBlock> CompressedFastqBlockQueue;
 typedef TDataPool<CompressedFastqBlock> CompressedFastqBlockPool;
-
 
 
 /**

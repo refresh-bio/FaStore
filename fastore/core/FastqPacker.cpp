@@ -15,6 +15,8 @@
 
 #include <algorithm>
 
+#include "../fastore_bin/Params.h" // for BinModuleConfig definition
+
 
 IFastqPacker::IFastqPacker(const BinModuleConfig& binConfig_)
 	:	binConfig(binConfig_)

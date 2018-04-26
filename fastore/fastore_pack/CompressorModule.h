@@ -10,16 +10,14 @@
 #ifndef H_DNARCHMODULE
 #define H_DNARCHMODULE
 
-#include "../fastore_bin/Globals.h"
-
-
-#include "../fastore_bin/FastqRecord.h"
+#include "../core/Globals.h"
 
 #include <string>
 #include <vector>
 
 #include "Params.h"
 
+#include "../core/FastqRecord.h"
 
 
 /**
@@ -47,7 +45,5 @@ public:
 	void Dnarch2Dna(const std::string& inArchiveFile_, const std::string& outDnaFile1_,
 					const std::string& outDnaFile2_, uint32 threadsNum_ = 1);
 };
-
-
 
 #endif // H_DNARCHMODULE

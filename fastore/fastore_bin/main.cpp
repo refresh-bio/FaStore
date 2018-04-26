@@ -6,17 +6,18 @@
   Authors: Lukasz Roguski, Idoia Ochoa, Mikel Hernaez & Sebastian Deorowicz
 */
 
-#include "Globals.h"
+#include "../core/Globals.h"
 
 #include <iostream>
 #include <string.h>
 
 #include "main.h"
 #include "BinModule.h"
-#include "Utils.h"
-#include "Thread.h"
-#include "../version.h"
-#include "QVZ.h"
+
+#include "../core/Utils.h"
+#include "../core/Thread.h"
+#include "../core/version.h"
+#include "../qvz/QVZ.h"
 
 
 uint32 InputArguments::AvailableCoresNumber = mt::thread::hardware_concurrency();

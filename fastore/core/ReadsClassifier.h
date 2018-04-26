@@ -10,16 +10,16 @@
 #ifndef READSCLASSIFIER_H
 #define READSCLASSIFIER_H
 
-#include "../fastore_bin/FastqRecord.h"
-#include "../fastore_bin/Params.h"
-#include "../fastore_bin/Node.h"
-#include "Params.h"
+#include "../core/FastqRecord.h"
 
 #include <vector>
 #include <deque>
 #include <stack>
 #include <list>
 #include <type_traits>
+
+#include "Node.h"
+#include "FastqCategorizer.h"
 
 
 template <typename _TNode, bool _TConst = false>
@@ -96,6 +96,44 @@ struct TNodeIterator
 typedef TNodeIterator<MatchNode*, false> MatchNodeIterator;
 typedef TNodeIterator<MatchNode*, true> MatchCNodeIterator;
 
+
+
+struct ReadsClassifierParams
+{
+	struct Default
+	{
+		static const int32 MaxCostValue = (uint16)-1;
+		static const int32 AutoEncodeThresholdValue = 0;
+		static const int32 ShiftCost = 1;
+		static const int32 MismatchCost = 2;
+		static const uint32 MaxLzWindowSize = MAX_LZ_SE;
+		static const uint32 MaxPairLzWindowSize = MAX_LZ_PE;
+		static const bool ExtraReduceHardReads = false;			// temporary, for backwards-compatibility
+		static const bool ExtraReduceExpensiveLzMatches = false;
+	};
+
+	int32 maxCostValue;
+	int32 encodeThresholdValue;
+	int32 pairEncodeThresholdValue;
+	int32 shiftCost;
+	int32 mismatchCost;
+	uint32 maxLzWindowSize;
+	uint32 maxPairLzWindowSize;
+	bool extraReduceHardReads;
+	bool extraReduceExpensiveLzMatches;
+
+	ReadsClassifierParams()
+		:	maxCostValue(Default::MaxCostValue)
+		,	encodeThresholdValue(Default::AutoEncodeThresholdValue)
+		,	pairEncodeThresholdValue(Default::AutoEncodeThresholdValue)
+		,	shiftCost(Default::ShiftCost)
+		,	mismatchCost(Default::MismatchCost)
+		,	maxLzWindowSize(Default::MaxLzWindowSize)
+		,	maxPairLzWindowSize(Default::MaxPairLzWindowSize)
+		,	extraReduceHardReads(Default::ExtraReduceHardReads)
+		,	extraReduceExpensiveLzMatches(Default::ExtraReduceExpensiveLzMatches)
+	{}
+};
 
 
 /**

@@ -10,8 +10,8 @@
 #ifndef RLEENCODER_H
 #define RLEENCODER_H
 
-#include "../fastore_bin/Globals.h"
-#include "../fastore_bin/BitMemory.h"
+#include "../core/Globals.h"
+#include "../core/BitMemory.h"
 
 
 /**
@@ -77,6 +77,7 @@ private:
 		writer.PutByte(s_);
 	}
 };
+
 
 class BinaryRleDecoder : public ICoder
 {
@@ -211,6 +212,7 @@ private:
 	uint32 prevSymbol;
 };
 
+
 class Rle0Decoder : public ICoder
 {
 public:
@@ -283,6 +285,5 @@ private:
 		return 0;
 	}
 };
-
 
 #endif // RLEENCODER_H

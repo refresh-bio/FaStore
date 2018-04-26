@@ -9,8 +9,8 @@
 #ifndef QUALITY_H
 #define QUALITY_H
 
-#include "Globals.h"
-#include "FastqParser.h"
+#include "../core/Globals.h"
+#include "../core/FastqParser.h"
 
 /**
  * Options for the QVZ compression process

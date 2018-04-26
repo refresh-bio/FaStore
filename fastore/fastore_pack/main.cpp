@@ -6,7 +6,7 @@
   Authors: Lukasz Roguski, Idoia Ochoa, Mikel Hernaez & Sebastian Deorowicz
 */
 
-#include "../fastore_bin/Globals.h"
+#include "../core/Globals.h"
 
 #include <iostream>
 #include <string.h>
@@ -15,10 +15,10 @@
 #include "CompressorModule.h"
 #include "Params.h"
 
-#include "../fastore_bin/Utils.h"
-#include "../fastore_bin/Thread.h"
+#include "../core/Utils.h"
+#include "../core/Thread.h"
+#include "../core/version.h"
 
-#include "../version.h"
 
 uint32 InputArguments::AvailableCoresNumber = mt::thread::hardware_concurrency();
 uint32 InputArguments::DefaultThreadNumber = MIN(8, InputArguments::AvailableCoresNumber);

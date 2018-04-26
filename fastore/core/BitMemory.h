@@ -19,7 +19,6 @@
 #include "Utils.h"
 
 
-
 /**
  * Reads the data from a specified memory buffer
  *

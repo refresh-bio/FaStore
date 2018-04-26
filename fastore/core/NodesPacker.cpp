@@ -6,10 +6,14 @@
   Authors: Lukasz Roguski, Idoia Ochoa, Mikel Hernaez & Sebastian Deorowicz
 */
 
-#include "NodesPacker.h"
-#include "../fastore_bin/BitMemory.h"
+#include "Globals.h"
 
 #include <deque>
+
+#include "NodesPacker.h"
+#include "BitMemory.h"
+
+#include "../fastore_bin/Params.h" // for BinModuleConfig definition
 
 
 std::pair<uint32, uint32> GetSizeClassAndBits(uint64 groupSize_)

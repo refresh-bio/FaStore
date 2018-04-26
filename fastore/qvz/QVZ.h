@@ -9,19 +9,18 @@
 #ifndef QVZ_H
 #define QVZ_H
 
-#include "../fastore_bin/Globals.h"
-#include "../fastore_bin/Quality.h"		// quality compression params
-#include "../fastore_bin/Stats.h"			// for QVZ stats
-
-#include "BitMemory.h"
+#include "../core/Globals.h"
+#include "../core/BitMemory.h"
 
 // QVZ includes
-#include "../fastore_pack/pmf.h"
-#include "../fastore_pack/well.h"
-#include "../fastore_pack/distortion.h"
-#include "../fastore_pack/quantizer.h"
-#include "../fastore_pack/qv_file.h"
-#include "../fastore_pack/codebook.h"
+#include "Quality.h"		// quality compression params
+#include "Stats.h"			// for QVZ stats
+#include "pmf.h"
+#include "well.h"
+#include "distortion.h"
+#include "quantizer.h"
+#include "qv_file.h"
+#include "codebook.h"
 
 struct cond_quantizer_list_t;
 struct qv_options_t;

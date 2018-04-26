@@ -6,17 +6,18 @@
   Authors: Lukasz Roguski, Idoia Ochoa, Mikel Hernaez & Sebastian Deorowicz
 */
 
-#include "../fastore_bin/Globals.h"
+#include "../core/Globals.h"
 
 #include <vector>
 #include <map>
 
 #include "RebinOperator.h"
-
-#include "../fastore_bin/BinFile.h"
-#include "../fastore_bin/FastqCategorizer.h"
-#include "NodesPacker.h"
 #include "DnaRebalancer.h"
+
+#include "../core/FastqCategorizer.h"
+#include "../core/NodesPacker.h"
+#include "../fastore_bin/BinFile.h"
+
 
 
 void BinBalancer::Run()

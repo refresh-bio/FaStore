@@ -9,7 +9,7 @@
 #ifndef H_MAIN
 #define H_MAIN
 
-#include "../fastore_bin/Globals.h"
+#include "../core/Globals.h"
 
 #include <string>
 #include <vector>

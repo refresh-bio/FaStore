@@ -19,7 +19,6 @@
 #include "Buffer.h"
 
 
-
 /**
  * Basic IO interfaces
  *

@@ -9,12 +9,12 @@
 #ifndef NODESPACKER_H
 #define NODESPACKER_H
 
-
-#include "../fastore_bin/Globals.h"
-#include "../fastore_bin/FastqPacker.h"
-#include "../fastore_bin/Node.h"
+#include "../core/Globals.h"
 
 #include <deque>
+
+#include "../core/FastqPacker.h"
+#include "../core/Node.h"
 
 
 /**

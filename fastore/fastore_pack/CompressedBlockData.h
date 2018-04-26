@@ -10,14 +10,13 @@
 #ifndef H_COMPRESSEDBLOCKDATA
 #define H_COMPRESSEDBLOCKDATA
 
-#include "../fastore_bin/Globals.h"
-#include "../fastore_bin/Buffer.h"
-#include "../fastore_bin/FastqRecord.h"
-
+#include "../core/Globals.h"
 
 #include <vector>
 #include <string>
 
+#include "../core/Buffer.h"
+#include "../core/FastqRecord.h"
 
 
 /**
@@ -63,7 +62,6 @@ struct FastqCompressedBin
 };
 
 
-
 /**
  * A working buffers used for compressing
  *
@@ -91,6 +89,7 @@ struct IFastqWorkBuffer
 #endif
 	}
 };
+
 
 struct FastqWorkBuffersSE : public IFastqWorkBuffer
 {
@@ -134,7 +133,6 @@ struct FastqWorkBuffersSE : public IFastqWorkBuffer
 				"Quality", "ReadIdToken", "ReadIdValue"}};
 	}
 };
-
 
 
 struct FastqWorkBuffersPE : public FastqWorkBuffersSE
@@ -222,8 +220,6 @@ struct CompressedFastqBlockStats
 };
 
 
-
-
 /**
  * A compressed block of FASTQ reads keeping only raw binary data
  *
@@ -256,6 +252,5 @@ struct CompressedFastqBlock
 #endif
 	}
 };
-
 
 #endif // H_COMPRESSEDBLOCKDATA

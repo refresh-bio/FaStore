@@ -7,17 +7,18 @@
   Authors: Lukasz Roguski, Idoia Ochoa, Mikel Hernaez & Sebastian Deorowicz
 */
 
-#include "Globals.h"
+#include "../core/Globals.h"
 
 #include <cstring>
 
 #include "BinFile.h"
-#include "BitMemory.h"
-#include "BinBlockData.h"
-#include "Exception.h"
-#include "BitMemory.h"
-#include "Utils.h"
-#include "QVZ.h"
+
+#include "../core/BinBlockData.h"
+#include "../core/BitMemory.h"
+#include "../core/Exception.h"
+#include "../core/BitMemory.h"
+#include "../core/Utils.h"
+#include "../qvz/QVZ.h"
 
 
 BinFileWriter::BinFileWriter()

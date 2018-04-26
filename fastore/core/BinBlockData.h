@@ -15,8 +15,8 @@
 #include <vector>
 #include <map>
 
-#include "Buffer.h"
-#include "Stats.h"
+#include "../core/Buffer.h"
+#include "../qvz/Stats.h"
 
 
 /**

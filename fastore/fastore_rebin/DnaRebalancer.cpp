@@ -6,10 +6,12 @@
   Authors: Lukasz Roguski, Idoia Ochoa, Mikel Hernaez & Sebastian Deorowicz
 */
 
-#include "DnaRebalancer.h"
+#include "../core/Globals.h"
 
 #include <algorithm>
 #include <queue>
+
+#include "DnaRebalancer.h"
 
 
 // helper functions

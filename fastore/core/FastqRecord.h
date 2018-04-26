@@ -11,12 +11,13 @@
 #define FASTQRECORD_H
 
 #include "Globals.h"
-#include "Buffer.h"
 
 #include <vector>
 #include <map>
 #include <string.h>
 #include <array>
+
+#include "Buffer.h"
 
 
 /**

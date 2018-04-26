@@ -9,16 +9,16 @@
 #ifndef H_DNAREBALANCER
 #define H_DNAREBALANCER
 
-#include "../fastore_bin/Globals.h"
-#include "../fastore_bin/FastqCategorizer.h"
+#include "../core/Globals.h"
 
 #include <vector>
-#include <map>
+#include <tuple>
 
 #include "Params.h"
-#include "../fastore_bin/Node.h"
-#include "../fastore_pack/ReadsClassifier.h"
-#include "../fastore_pack/Params.h"
+
+#include "../core/Node.h"
+#include "../core/FastqCategorizer.h"
+#include "../core/ReadsClassifier.h"
 
 
 /**

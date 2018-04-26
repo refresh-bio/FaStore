@@ -9,14 +9,13 @@
 #ifndef H_MAIN
 #define H_MAIN
 
-#include "../fastore_bin/Globals.h"
+#include "../core/Globals.h"
 
 #include <string>
 #include <vector>
 
 #include "Params.h"
-#include "codebook.h"
-
+#include "../qvz/codebook.h"
 
 
 struct InputArguments

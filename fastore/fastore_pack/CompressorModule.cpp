@@ -7,28 +7,26 @@
   Authors: Lukasz Roguski, Idoia Ochoa, Mikel Hernaez & Sebastian Deorowicz
 */
 
-#include "../fastore_bin/Globals.h"
+#include "../core/Globals.h"
 
 #include <iostream>
 #include <algorithm>
+
 #include "CompressorModule.h"
-#include "BinFileExtractor.h"
 #include "ArchiveFile.h"
 #include "FastqCompressor.h"
 #include "CompressorOperator.h"
 #include "Params.h"
 
-#include "../fastore_bin/FastqPacker.h"
-#include "../fastore_bin/FastqParser.h"
-#include "../fastore_bin/Thread.h"
-
+#include "../core/FastqPacker.h"
+#include "../core/FastqParser.h"
+#include "../core/Thread.h"
+#include "../core/NodesPacker.h"
+#include "../core/FastqStream.h"
+#include "../core/FastqParser.h"
+#include "../qvz/QVZ.h"
+#include "../fastore_rebin/BinFileExtractor.h"
 #include "../fastore_rebin/Params.h"
-#include "../fastore_rebin/NodesPacker.h"
-#include "../fastore_bin/FastqStream.h"
-#include "../fastore_bin/FastqParser.h"
-
-#include "../fastore_bin/QVZ.h"
-
 
 
 void CompressorModuleSE::Bin2Dnarch(const std::string &inBinFile_, const std::string &outArchiveFile_,
