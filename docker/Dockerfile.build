@@ -1,0 +1,13 @@
+# building stage
+#
+FROM fastore:devel
+
+WORKDIR "/build/"
+
+COPY fastore ./fastore
+COPY Makefile .
+COPY CMakeLists.txt .
+
+RUN make build && \
+	cp bin/fastore_* ./ && \
+	make clean

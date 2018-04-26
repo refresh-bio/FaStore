@@ -1,0 +1,12 @@
+# running stage
+#
+FROM debian:jessie-slim
+
+WORKDIR "/test/"
+
+COPY --from=fastore:latest /build/fastore_* ./
+COPY scripts/fastore_* ./
+#COPY docker/test.sh .
+
+ENTRYPOINT ["bash"]
+#CMD ["test.sh"]

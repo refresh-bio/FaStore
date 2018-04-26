@@ -1,0 +1,10 @@
+# required system packages for building
+#
+FROM debian:jessie-slim
+
+RUN apt-get update && \
+	apt-get dist-upgrade -y && \
+	apt-get -y install build-essential cmake zlib1g-dev && \
+	apt-get clean autoclean && \
+    apt-get autoremove -y && \
+    rm -rf /var/lib/apt/lists/*
