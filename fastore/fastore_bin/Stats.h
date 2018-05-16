@@ -42,9 +42,11 @@ struct FastqRawBlockStats : public FastqRecordBinStats
 
 	struct HeaderStats
 	{
+		static const uint32 MaxPossibleValues = 1 << 16;
+
 		static const std::string Separators()
 		{
-			return " ./:#";
+			return " ./:#+";
 		}
 
 		struct Field

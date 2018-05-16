@@ -418,11 +418,11 @@ void BinFileWriter::WriteFileFooter()
 			{
 				// not storing min/max length
 
-				ASSERT(f.possibleValues.size() < 255);			// we shall set max limit over the number of available tokens
+				ASSERT(f.possibleValues.size() < FastqRawBlockStats::HeaderStats::MaxPossibleValues);
 
 				if (!f.isConst)
 				{
-					writer.PutByte(f.possibleValues.size());
+					writer.Put2Bytes(f.possibleValues.size());
 				}
 
 				for (const std::string& s : f.possibleValues)
@@ -784,8 +784,8 @@ void BinFileReader::ReadFileFooter()
 				uint32 possibleValues = 1;
 				if (!f.isConst)
 				{
-					possibleValues = reader.GetByte();
-					ASSERT(possibleValues > 1 && possibleValues < 255);			// we shall set max limit over the number of available tokens
+					possibleValues = reader.Get2Bytes();
+					ASSERT(possibleValues > 1 && possibleValues < FastqRawBlockStats::HeaderStats::MaxPossibleValues);
 				}
 
 				for (uint32 i = 0; i < possibleValues; ++i)
