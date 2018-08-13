@@ -1,5 +1,6 @@
 *.DS_Store
-*.o
-bin
-*.user
 *.dSYM
+*.o
+*.user
+*~
+bin
