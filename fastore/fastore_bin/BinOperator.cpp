@@ -88,7 +88,9 @@ void BinEncoderSE::Run()
 	FastqRawBlockStats stats;
 	while (fqPartsQueue->Pop(partId, fqPart))			// different types
 	{
-		stats.Clear();
+		// TIP: when processing small files, stats need to be cleared at the end of each bin processing, 
+		// as the stats will be lost if the bin will be empty after post-processing
+		//stats.Clear();
 		parser.ParseFrom(*fqPart, reads, stats, binConfig.headParams.preserveComments);				// different types
 		ASSERT(!reads.empty());
 
@@ -136,7 +138,7 @@ void BinEncoderSE::Run()
 				}
 				else
 				{
-					const FastqRecord& r0 = *records.back();        // back to have the max id number
+					const FastqRecord& r0 = *records.back();	// back to have the max id number
 					const bool usesQuality = r0.qua != NULL;
 					const bool usesHeaders = r0.head != NULL;
 					const uint64 approxReadSize = (uint64)r0.seqLen * (1 + (uint64)usesQuality) + (uint64)usesHeaders*r0.headLen*1.2;
@@ -192,6 +194,11 @@ void BinEncoderSE::Run()
 			}
 		}
 
+
+		// do not process empty bins (they were not empty, but now are after post processing)
+		if (dnaBins.empty())
+			continue;
+
 		partId++;
 		binPartsPool->Acquire(binPart);
 
@@ -206,6 +213,7 @@ void BinEncoderSE::Run()
 
 		fqPartsPool->Release(fqPart);					// this one uses different type
 
+		ASSERT(binPart->descriptors.size() > 0);
 		binPartsQueue->Push(partId, binPart);
 
 
@@ -235,6 +243,8 @@ void BinEncoderSE::Run()
 		// TODO: reuse this one
 		//
 		dnaBins.clear();
+
+		stats.Clear();
 	}
 
 	// TODO: move to some common code-base
@@ -315,6 +325,9 @@ void BinEncoderSE::Run()
 
 		packer.PackToBins(dnaBins, *binPart);
 
+		binPart->stats.Update(stats);
+
+		ASSERT(binPart->descriptors.size() > 0);
 		binPartsQueue->Push(partId, binPart);
 	}
 	binPartsQueue->SetCompleted();
@@ -398,7 +411,7 @@ void BinEncoderPE::Run()
 				}
 				else
 				{
-					const FastqRecord& r0 = *records.back();        // back to have the max id number
+					const FastqRecord& r0 = *records.back();	// back to have the max id number
 					const bool usesQuality = r0.qua != NULL;
 					const bool usesHeaders = r0.head != NULL;
 					const uint64 approxRecordSize = (uint64)(r0.seqLen + r0.auxLen) * (1 + (uint64)usesQuality) + (uint64)usesHeaders * (uint64)r0.headLen * 1.2;
