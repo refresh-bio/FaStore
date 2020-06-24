@@ -1,4 +1,5 @@
 # FaStore
+[![GitHub downloads](https://img.shields.io/github/downloads/refresh-bio/FaStore/total.svg?style=flag&label=GitHub%20downloads)](https://github.com/refresh-bio/FaStore/releases)
 
 ## Overview
 
