@@ -77,3 +77,8 @@ be placed in `bin` subdirectory.
 
 However, to compile each subprogram separately, use the makefile files provided
 in each of subprograms directory.
+
+## Citing
+<a href="https://doi.org/10.1093/bioinformatics/bty205">
+Roguski, L., Ochoa, I., Hernaez, M., Deorowicz, S. (2018) FaStore: a space-saving solution for raw sequencing data. Bioinformatics 16, 2748&ndash;2756.
+</a>
